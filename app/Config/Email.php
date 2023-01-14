@@ -9,7 +9,7 @@ class Email extends BaseConfig
 	/**
 	 * @var string
 	 */
-	public $fromEmail = 'noreply@msgarski.com';
+	public $fromEmail = 'msgarski@gmail.com';
 
 	/**
 	 * @var string
@@ -68,7 +68,7 @@ class Email extends BaseConfig
 	 *
 	 * @var integer
 	 */
-	public $SMTPPort = 25;
+	public $SMTPPort;
 
 	/**
 	 * SMTP Timeout (in seconds)
@@ -89,7 +89,7 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $SMTPCrypto = 'tls';
+	public $SMTPCrypto;
 
 	/**
 	 * Enable word-wrap

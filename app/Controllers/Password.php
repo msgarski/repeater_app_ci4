@@ -56,8 +56,8 @@ class Password extends ResourceController
                 $userModel->save($user);
 
                 $this->sendEmailWithResetToken($user);
-                var_dump(' dotąd oki: ', $http->email);
-                exit;
+                // var_dump(' dotąd oki: ', $http->email);
+                // exit;
             }
             else
             {
@@ -82,10 +82,11 @@ class Password extends ResourceController
     public function sendEmailWithResetToken($user)
     {
         $email = service('email');
-
+// todo przywrócić to:
 		$email->setTo($user->email);
 
-		$email->setFrom('garski@wp.pl');
+		$email->setFrom('msgarski@gmail.com');
+
 
 		$email->setSubject('Odnowienie hasła');
 
@@ -96,6 +97,20 @@ class Password extends ResourceController
 		$email->setMessage($message);
 
 		$email->send();
+    }
+    public function testEmail(){
+        // this function is only for testing sending emails in general
+        $email = service('email');
+        $email->setTo('msgarski@gmail.com');
+		$email->setFrom('garski@wp.pl');
+		$email->setSubject('Odnowienie hasła');
+        $email->setMessage('<h1>Hello thats me</h1>');
+
+        if($email->send()){
+            echo "email sent! Success";
+        } else {
+            echo $email->printDebugger();
+        }
     }
 
     public function reseting($token)
