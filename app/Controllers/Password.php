@@ -82,7 +82,7 @@ class Password extends ResourceController
     public function sendEmailWithResetToken($user)
     {
         $email = service('email');
-// todo przywrócić to:
+        
 		$email->setTo($user->email);
 
 		$email->setFrom('msgarski@gmail.com');
