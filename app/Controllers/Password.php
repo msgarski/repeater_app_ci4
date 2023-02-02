@@ -36,12 +36,8 @@ class Password extends ResourceController
 
     public function checking()
     {
-        // var_dump('wszystko oki');
-        // exit;
         $http = $this->request->getJSON();
 
-        // var_dump(' moj email z jsona: ', $http->email);
-        // exit;
         $email = $http->email;
         if($email)
         {
@@ -56,14 +52,11 @@ class Password extends ResourceController
                 $userModel->save($user);
 
                 $this->sendEmailWithResetToken($user);
-                // var_dump(' dotąd oki: ', $http->email);
-                // exit;
+                
             }
             else
             {
-                //var_dump(' brak usera : ', $http->email);
-                //exit;
-                return $this->respond('brak', 404);                
+                return $this->respond('brak usera...niestety', 404);                
             }
         }
         else
@@ -124,6 +117,7 @@ class Password extends ResourceController
         }
         else
         {
+            //todo tu trzeba zmienić port!
             return redirect()->to('http://localhost:8081/signin');
         }
 
@@ -138,11 +132,11 @@ class Password extends ResourceController
 
         if($user)
         {
-                //! undefined method:
+                //! undefined method: o co chodzi???
                 $req = $this->request->getJSON();
             $newData = [
-                'password'  =>  $req->password,
-                'password_confirmation' =>  $req->password_confirmation
+                'password'  =>  $req->password1,
+                'password_confirmation' =>  $req->password2
             ];
             
             $user->fill($newData);
@@ -156,7 +150,7 @@ class Password extends ResourceController
             }
             else
             {
-                $response = 'Nie znaleziono takiego użytkownika';
+                $response = 'Nie znaleziono użytkownika tego tokena';
                 return $this->respond($response, 401);   
             }
         }
