@@ -50,9 +50,8 @@ class Login extends ResourceController
         }
 
         $userId = $userData[0];
-
         $userEmail = $userData[1];
-        
+        $userName = $userData[2];
         
         if($userId)
         {   
@@ -60,7 +59,8 @@ class Login extends ResourceController
 
             $response = [
                 'token'    =>  $jwt,
-                'userId'    =>  $userId
+                'userId'    =>  $userId,
+                'userName' => $userName
             ];
             
             return $this->respond($response, 200);

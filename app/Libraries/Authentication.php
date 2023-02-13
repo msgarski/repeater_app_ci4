@@ -24,19 +24,14 @@ class Authentication
             }
             elseif(!$user->is_active)
             {
-                // user is not activated:
+                // user is not activated yet:
                 return -1;
             }
-//todo sesja do usunięcia:
-            // ustanowienie sesji:
-            // $session = session();
-            // $session->regenerate();
-            // ustawienie zmiennej sesyjnej 'user_id', żeby było łatwiej później do niej sięgać
-            // $session->set('user_id', $user->user_id);
         }
         
         $userData = [$user->user_id,
-                    $user->email
+                    $user->email,
+                    $user->name
                 ];
         //  var_dump($userData);
         // exit;      
