@@ -150,9 +150,13 @@ class Password extends ResourceController
             }
             else
             {
-                $response = 'Nie znaleziono użytkownika tego tokena';
-                return $this->respond($response, 401);   
+                $response = 'Nie zapisano podanego hasła - nie wiemy dlaczego...';
+                return $this->respond($response, 408);   
             }
+        }
+        else{
+            $response = 'Nie znaleziono użytkownika tego tokena';
+                return $this->respond($response, 401);  
         }
     }
 }
