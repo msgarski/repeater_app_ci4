@@ -7,3 +7,5 @@
 <p><a href="http://localhost:3000/resetpass/<?= $token ?>">Resetuj hasło</a></p>
 
 <?php // todo dokąd ma być to wysłane przy Vue???? 
+
+// todo te adresy wyciąć i wstawić tu stałe, żeby łatwiej było je potem zmieniać

@@ -50,7 +50,7 @@ class Signup extends ResourceController
             
             $user = $model->getUserByEmail($http->email);
 
-            return $this->respond($user->user_id, 200);
+            return $this->respond($user->user_id, 201);
         }
         else 
         {

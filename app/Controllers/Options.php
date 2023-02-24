@@ -34,10 +34,11 @@ class Options extends BaseController
         
         $data = [
             'user_id'               =>  $http->userId,
-            'day_learning_limit'    =>  $http->learningLim,
-            'batch_learning_limit'  =>  $http->learningBatch,
-            'day_repeat_limit'      =>  $http->repeatLim,
-            'overlearning'          =>  $http->overlearn
+            'day_learning_limit'    =>  $http->learningDayLimit,
+            'batch_learning_limit'  =>  $http->learningBatchLimit,
+            'day_repeat_limit'      =>  $http->repeatDayLimit,
+            'overlearning'          =>  $http->overlearning,
+            // 'fast_repeat_learn'     =>  $http->fastRepeatBatch
         ];
         // var_dump('moje dane', $this->optionsModel);
         // exit;
