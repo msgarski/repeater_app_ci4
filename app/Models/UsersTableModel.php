@@ -94,7 +94,6 @@ class UsersTableModel extends \CodeIgniter\Model
         return $user;
     }
 
-
     public function activateByToken($token)
     {
         // todo: poniższa konsolidacja do sprawdzenia:

@@ -59,11 +59,10 @@ class Signup extends ResourceController
     }
 
     public function activate($token)
-    {
-        
+    {       
+        // var_dump('moje dane', $token);
+        // exit;
         $model = service('userModel');
-
-        
 
         $result = $model->activateByToken($token);
 
@@ -83,6 +82,8 @@ class Signup extends ResourceController
 
     public function sendActivationEmail($user)
     {
+        // var_dump('moje dane', );
+        // exit;
         $email = service('email');
 
 		$email->setTo($user->email);
@@ -100,15 +101,4 @@ class Signup extends ResourceController
 		$email->send();
     }
 
-
-
-
-
-
-
-    // public function success()
-    // {
-    //     //todo ta funkcja niepotrzebna w vue...
-	// 	return view('Signup/success_view');
-    // }
 }

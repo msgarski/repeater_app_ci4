@@ -125,6 +125,8 @@ class Password extends ResourceController
     }
     public function newPassword($token)
     {
+        // var_dump('moje dane', $token);
+        // exit;
         $model = service('userModel');
 
         $user = $model->findUserByTokenForReset($token);
