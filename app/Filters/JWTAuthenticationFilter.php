@@ -15,20 +15,17 @@ class JWTAuthenticationFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
-        // var_dump('jestem w filtrze...');
-        // exit;
-        $authenticationHeader = $request->getServer('HTTP_AUTHORIZATION');
-        // var_dump('nagłówek wiadomości z filtra helpera:', $authenticationHeader);
-        // exit;
-
+        $authorizationHeader = $request->getServer('HTTP_AUTHORIZATION');
+        
         try {
             helper('jwt');
-            $encodedToken = getJWTFromRequest($authenticationHeader);
-            validateJWTFromRequest($encodedToken);
-            return $request;
-
+            $encodedToken = getJWTFromRequestHeader($authorizationHeader);
+            if(validateJWTFromRequest($encodedToken)){
+                return $request;
+            }else{
+                // failure and... what?
+            }
         } catch (Exception $e) {
-
             return Services::response()
                 ->setJSON(
                     [
@@ -36,7 +33,6 @@ class JWTAuthenticationFilter implements FilterInterface
                     ]
                 )
                 ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
-
         }
     }
 

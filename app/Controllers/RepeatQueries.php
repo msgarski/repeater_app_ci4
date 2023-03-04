@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\QueriesRepeatModel;
-use App\Libraries\MassCardInput;
-use App\Libraries\Queries;
-use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
-use App\Models\ProductModel;
-use CodeIgniter\Controller;
-use Faker\Provider\Base;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
-use function PHPUnit\Framework\isJson;
-use App\Controllers\Porch;
+// use App\Libraries\MassCardInput;
+// use App\Libraries\Queries;
+// use CodeIgniter\RESTful\ResourceController;
+// use App\Models\ProductModel;
+// use CodeIgniter\Controller;
+// use Faker\Provider\Base;
+// use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+// use function PHPUnit\Framework\isJson;
+// use App\Controllers\Porch;
 
 //class User extends ResourceController - może tak?
 
@@ -45,13 +45,21 @@ class RepeatQueries extends BaseController
     {
         $db = \Config\Database::connect();
         
-        $model = new QueriesRepeatModel($db);
-
+        
         if ($db && $user_id)
         {
-            $result = $model->getRepeatsNumsForCourses($user_id);
+            $model = new QueriesRepeatModel($db);
+
+            $resultData = $model->getRepeatsNumsForCourses($user_id);
+            $token = 111;
+
+            $result = [
+                'dbData' => $resultData,
+                'token' => $token,
+            ];
             
-            return $this->respond($result, 200);            
+            return $this->respond($result, 200);   
+                
         } 
         else 
         {

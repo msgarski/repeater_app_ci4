@@ -1,15 +1,14 @@
 <?php
 
 use Firebase\JWT\JWT;
-
 //use App\Models\UserModel;
 //use Config\Services;
 
-function getJWTFromRequest($authenticationHeader): string
+function getJWTFromRequestHeader($authenticationHeader): string
 {
     //! musi mieć nagłówek
     if (is_null($authenticationHeader))
-    { //JWT is absent
+    { 
         throw new Exception('Missing or invalid JWT in request');
     }
     //Header should be splitted, because is in the format: Bearer XXXXXXXXX
@@ -21,17 +20,22 @@ function validateJWTFromRequest(string $encodedToken)
     //primary version:  $key = Services::getSecretKey();
     $key = service('getSecretKey');
     $decodedToken = JWT::decode($encodedToken, $key, ['HS256']);
-    //? to poniżej, bo token jest jako obiekt, więc może go trzeba zamienić na array???
+    //? should we change it into array or leave it as an object?
     //$decodedToken = (array) $decodedToken;
 
     $userModel = service('userModel');
 
-    if($userModel->getUserByEmail($decodedToken->email))
+    $timeLeft = $decodedToken->exp - time();
+
+    log_message(5,'Pozostało czasu tokenowi: '.$timeLeft);
+
+    if($userModel->getUserByEmail($decodedToken->email) && ($timeLeft > 0))
     {
         return true;
     }
     else
-    {
+    { //? throw an error or return false?
+        throw new Exception('Missing or invalid JWT in request');
         return false;
     }
 }

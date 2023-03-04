@@ -15,27 +15,23 @@ use CodeIgniter\API\ResponseTrait;
 class Login extends ResourceController
 {
     // ! delete log_message() before production !!!!
+    // ChromePhp::log('Hello console!');
+    // error_log(print_r($_SERVER['DOCUMENT_ROOT'], true), 3, 'my.log');
     use ResponseTrait;
 
     public function entering()
     {
-// ChromePhp::log('Hello console!');
-// error_log(print_r($_SERVER['DOCUMENT_ROOT'], true), 3, 'my.log');
 
 // log_message(8,'Some 8variable did not contain a value.');
 
-
-        helper('jwt_helper');
+        
 
         $http = $this->request->getJSON();
 
         $email = $http->email;
-log_message(5,'Some 4ariable did not contain a value: '.$email);
-
-       
+// log_message(5,'Some 4ariable did not contain a value: '.$email);
 
         $password = $http->password;
-        
         
         $authentic = service('authentication');
         
@@ -60,6 +56,7 @@ log_message(5,'Some 4ariable did not contain a value: '.$email);
         
         if($userId)
         {   
+            helper('jwt_helper');
             $jwt = getSignedJWTForUser($userEmail);
 
             $response = [
