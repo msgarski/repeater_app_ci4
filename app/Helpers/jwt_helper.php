@@ -56,3 +56,4 @@ function getSignedJWTForUser($email)
     $jwt = JWT::encode($payload, service('getSecretKey') );
     return $jwt;
 }
+?>
