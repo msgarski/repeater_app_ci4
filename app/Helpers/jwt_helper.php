@@ -13,23 +13,19 @@ function getJWTFromRequest($authenticationHeader): string
         throw new Exception('Missing or invalid JWT in request');
     }
     //Header should be splitted, because is in the format: Bearer XXXXXXXXX
-    return explode(' ', $authenticationHeader)[1]; //? to jest ciekawe...
+    return explode(' ', $authenticationHeader)[1];
 }
 
 function validateJWTFromRequest(string $encodedToken)
 {
-    // to poniżej to pierwotna wersja:
-    //$key = Services::getSecretKey();
+    //primary version:  $key = Services::getSecretKey();
     $key = service('getSecretKey');
-
     $decodedToken = JWT::decode($encodedToken, $key, ['HS256']);
-
     //? to poniżej, bo token jest jako obiekt, więc może go trzeba zamienić na array???
     //$decodedToken = (array) $decodedToken;
 
     $userModel = service('userModel');
 
-    //todo nic ta metoda nie zwraca??? - pierwotnie, nie...
     if($userModel->getUserByEmail($decodedToken->email))
     {
         return true;
@@ -54,6 +50,7 @@ function getSignedJWTForUser($email)
     ];
 
     //? ustawienie opóźnienia, ale czy to dobre miejsce???
+    // ! po co jest to leeway?
     //JWT::$leeway = 60; // $leeway in seconds
 
     $jwt = JWT::encode($payload, service('getSecretKey') );

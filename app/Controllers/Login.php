@@ -2,30 +2,35 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\ProductModel;
-use Faker\Provider\Base;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
-use function PHPUnit\Framework\isJson;
+// use App\Controllers\BaseController;
+// use CodeIgniter\Log\Handlers\ChromeLoggerHandler;
+// use App\Models\ProductModel;
+// use Faker\Provider\Base;
+// use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+// use function PHPUnit\Framework\isJson;
+// use $_SERVER['DOCUMENT_ROOT'] . '/ChromePhp.php';
 
 class Login extends ResourceController
 {
+    // ! delete log_message() before production !!!!
     use ResponseTrait;
 
     public function entering()
     {
+// ChromePhp::log('Hello console!');
+// error_log(print_r($_SERVER['DOCUMENT_ROOT'], true), 3, 'my.log');
 
-        // var_dump('user data entering');
-        // exit;
+// log_message(8,'Some 8variable did not contain a value.');
+
 
         helper('jwt_helper');
 
         $http = $this->request->getJSON();
 
         $email = $http->email;
+log_message(5,'Some 4ariable did not contain a value: '.$email);
 
        
 
@@ -67,8 +72,6 @@ class Login extends ResourceController
         }
         else
         {
-            var_dump('NIE udalo sie zalogować');
-            exit;
             return $this->respond('Nieprawidlowe dane logowania', 200);
         }   
     }
@@ -88,4 +91,4 @@ class Login extends ResourceController
                         ->with('info', 'Wylogowano');
     }
 }
-
+?>
