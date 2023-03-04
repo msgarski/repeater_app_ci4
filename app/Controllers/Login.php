@@ -88,4 +88,4 @@ class Login extends ResourceController
                         ->with('info', 'Wylogowano');
     }
 }
-
+?>

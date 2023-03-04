@@ -76,10 +76,10 @@ class TestQueries extends BaseController
     {
         //$db = \Config\Database::connect();
 
-        $result = $this->optionsModel->getOptionsByUserId($user_id);
+//         $result = $this->optionsModel->getOptionsByUserId($user_id);
 
-//         var_dump('wygląd tablicy', $result);
-// exit;
-        return $this->respond($result, 200);
+// //         var_dump('wygląd tablicy', $result);
+// // exit;
+//         return $this->respond($result, 200);
     }
 }

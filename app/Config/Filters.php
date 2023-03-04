@@ -107,3 +107,4 @@ class Filters extends BaseConfig
 // 	'signup/*',
 // 	'signup'
 // ],
+?>

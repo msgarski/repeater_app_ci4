@@ -94,12 +94,12 @@ class Learning extends BaseController
             return $this->respond('update opcji nieudany', 401);
         }
     }
-    public function getOptionsForUser($user_id)
-    {
-        //$db = \Config\Database::connect();
+    // public function getOptionsForUser($user_id)
+    // {
+    //     //$db = \Config\Database::connect();
 
-        $result = $this->optionsModel->getOptionsByUserId($user_id);
+    //     $result = $this->optionsModel->getOptionsByUserId($user_id);
 
-        return $this->respond($result, 200);
-    }
+    //     return $this->respond($result, 200);
+    // }
 }

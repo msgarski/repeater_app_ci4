@@ -36,6 +36,8 @@ class Password extends ResourceController
 
     public function checking()
     {
+        // var_dump('jestem w password checking...');
+        // exit;
         $http = $this->request->getJSON();
 
         $email = $http->email;
