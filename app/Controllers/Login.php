@@ -24,12 +24,10 @@ class Login extends ResourceController
 
 // log_message(8,'Some 8variable did not contain a value.');
 
-        
-
         $http = $this->request->getJSON();
 
         $email = $http->email;
-// log_message(5,'Some 4ariable did not contain a value: '.$email);
+// log_message(5,'Some 4ariable did not contain a value: ');
 
         $password = $http->password;
         

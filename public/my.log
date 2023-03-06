@@ -1,0 +1,687 @@
+App\Models\UsersTableModel Object
+(
+    [table:protected] => user
+    [primaryKey:protected] => user_id
+    [allowedFields:protected] => Array
+        (
+            [0] => name
+            [1] => user_id
+            [2] => email
+            [3] => password
+            [4] => activation_hash
+            [5] => reset_hash
+            [6] => reset_expires_at
+        )
+
+    [returnType:protected] => App\Entities\UserEntity
+    [useTimestamps:protected] => 1
+    [validationRules:protected] => Array
+        (
+            [name] => required
+            [email] => required|valid_email|is_unique[user.email]
+            [password] => required|min_length[6]
+            [password_confirmation] => required|matches[password]
+        )
+
+    [validationMessages:protected] => Array
+        (
+            [name] => Array
+                (
+                    [required] => Imię jest wymagane
+                )
+
+            [email] => Array
+                (
+                    [required] => Adres e-mail jest wymagany
+                    [is_unique] => Istnieje już konto dla podanego adresu
+                    [valid_email] => Nieprawidłlowy format adresu email
+                )
+
+            [password] => Array
+                (
+                    [required] => Wymagane jest podanie hasła
+                    [min_length[6]] => Hasło powinno mieć długość min 6 znaków
+                )
+
+            [password_confirmation] => Array
+                (
+                    [required] => Potwierdź hasło
+                    [matches] => Wprowadzone hasła nie są identyczne
+                    [min_length[6]] => Długość hasło to min 6 znaków
+                )
+
+        )
+
+    [beforeInsert:protected] => Array
+        (
+            [0] => hashPassword
+        )
+
+    [beforeUpdate:protected] => Array
+        (
+            [0] => hashPassword
+        )
+
+    [useAutoIncrement:protected] => 1
+    [builder:protected] => 
+    [tempData:protected] => Array
+        (
+        )
+
+    [escape:protected] => Array
+        (
+        )
+
+    [pager] => 
+    [insertID:protected] => 0
+    [DBGroup:protected] => 
+    [useSoftDeletes:protected] => 
+    [dateFormat:protected] => datetime
+    [createdField:protected] => created_at
+    [updatedField:protected] => updated_at
+    [tempUseSoftDeletes:protected] => 
+    [deletedField:protected] => deleted_at
+    [tempReturnType:protected] => App\Entities\UserEntity
+    [protectFields:protected] => 1
+    [db:protected] => CodeIgniter\Database\MySQLi\Connection Object
+        (
+            [DBDriver] => MySQLi
+            [deleteHack] => 1
+            [escapeChar] => `
+            [mysqli] => mysqli Object
+                (
+                    [affected_rows] => 1
+                    [client_info] => mysqlnd 8.0.2
+                    [client_version] => 80002
+                    [connect_errno] => 0
+                    [connect_error] => 
+                    [errno] => 0
+                    [error] => 
+                    [error_list] => Array
+                        (
+                        )
+
+                    [field_count] => 11
+                    [host_info] => localhost via TCP/IP
+                    [info] => 
+                    [insert_id] => 0
+                    [server_info] => 8.0.23
+                    [server_version] => 80023
+                    [sqlstate] => 00000
+                    [protocol_version] => 10
+                    [thread_id] => 281
+                    [warning_count] => 0
+                )
+
+            [DSN:protected] => 
+            [port:protected] => 3307
+            [hostname:protected] => localhost
+            [username:protected] => root
+            [password:protected] => 
+            [database:protected] => repeater
+            [subdriver:protected] => 
+            [DBPrefix:protected] => 
+            [pConnect:protected] => 
+            [DBDebug:protected] => 1
+            [charset:protected] => utf8
+            [DBCollat:protected] => utf8_general_ci
+            [swapPre:protected] => 
+            [encrypt:protected] => 
+            [compress:protected] => 
+            [strictOn:protected] => 
+            [failover:protected] => Array
+                (
+                )
+
+            [lastQuery:protected] => CodeIgniter\Database\Query Object
+                (
+                    [originalQueryString:protected] => SELECT *
+FROM `user`
+WHERE `email` = :email:
+ LIMIT 1
+                    [finalQueryString:protected] => SELECT *
+FROM `user`
+WHERE `email` = 'msgarski@gmail.com'
+ LIMIT 1
+                    [binds:protected] => Array
+                        (
+                            [email] => Array
+                                (
+                                    [0] => msgarski@gmail.com
+                                    [1] => 1
+                                )
+
+                        )
+
+                    [bindMarker:protected] => ?
+                    [startTime:protected] => 1678102441.6893
+                    [endTime:protected] => 1678102441.6918
+                    [errorCode:protected] => 
+                    [errorString:protected] => 
+                    [db] => CodeIgniter\Database\MySQLi\Connection Object
+ *RECURSION*
+                )
+
+            [connID] => mysqli Object
+                (
+                    [affected_rows] => 1
+                    [client_info] => mysqlnd 8.0.2
+                    [client_version] => 80002
+                    [connect_errno] => 0
+                    [connect_error] => 
+                    [errno] => 0
+                    [error] => 
+                    [error_list] => Array
+                        (
+                        )
+
+                    [field_count] => 11
+                    [host_info] => localhost via TCP/IP
+                    [info] => 
+                    [insert_id] => 0
+                    [server_info] => 8.0.23
+                    [server_version] => 80023
+                    [sqlstate] => 00000
+                    [protocol_version] => 10
+                    [thread_id] => 281
+                    [warning_count] => 0
+                )
+
+            [resultID] => mysqli_result Object
+                (
+                    [current_field] => 0
+                    [field_count] => 11
+                    [lengths] => 
+                    [num_rows] => 1
+                    [type] => 0
+                )
+
+            [protectIdentifiers] => 1
+            [reservedIdentifiers:protected] => Array
+                (
+                    [0] => *
+                )
+
+            [likeEscapeStr] =>  ESCAPE '%s' 
+            [likeEscapeChar] => !
+            [dataCache] => Array
+                (
+                )
+
+            [connectTime:protected] => 1678102441.5779
+            [connectDuration:protected] => 0.10683608055115
+            [pretend:protected] => 
+            [transEnabled] => 1
+            [transStrict] => 1
+            [transDepth:protected] => 0
+            [transStatus:protected] => 1
+            [transFailure:protected] => 
+            [aliasedTables:protected] => Array
+                (
+                )
+
+            [queryClass:protected] => CodeIgniter\Database\Query
+        )
+
+    [skipValidation:protected] => 
+    [cleanValidationRules:protected] => 1
+    [validation:protected] => CodeIgniter\Validation\Validation Object
+        (
+            [ruleSetFiles:protected] => Array
+                (
+                    [0] => CodeIgniter\Validation\Rules
+                    [1] => CodeIgniter\Validation\FormatRules
+                    [2] => CodeIgniter\Validation\FileRules
+                    [3] => CodeIgniter\Validation\CreditCardRules
+                )
+
+            [ruleSetInstances:protected] => Array
+                (
+                )
+
+            [rules:protected] => Array
+                (
+                )
+
+            [data:protected] => Array
+                (
+                )
+
+            [errors:protected] => Array
+                (
+                )
+
+            [customErrors:protected] => Array
+                (
+                )
+
+            [config:protected] => Config\Validation Object
+                (
+                    [ruleSets] => Array
+                        (
+                            [0] => CodeIgniter\Validation\Rules
+                            [1] => CodeIgniter\Validation\FormatRules
+                            [2] => CodeIgniter\Validation\FileRules
+                            [3] => CodeIgniter\Validation\CreditCardRules
+                        )
+
+                    [templates] => Array
+                        (
+                            [list] => CodeIgniter\Validation\Views\list
+                            [single] => CodeIgniter\Validation\Views\single
+                        )
+
+                )
+
+            [view:protected] => CodeIgniter\View\View Object
+                (
+                    [data:protected] => Array
+                        (
+                        )
+
+                    [tempData:protected] => 
+                    [viewPath:protected] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\app\Config/../Views\
+                    [renderVars:protected] => Array
+                        (
+                        )
+
+                    [loader:protected] => CodeIgniter\Autoloader\FileLocator Object
+                        (
+                            [autoloader:protected] => CodeIgniter\Autoloader\Autoloader Object
+                                (
+                                    [prefixes:protected] => Array
+                                        (
+                                            [CodeIgniter] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\
+                                                )
+
+                                            [App] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../../app
+                                                )
+
+                                            [Config] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../../app/Config
+                                                )
+
+                                            [phpDocumentor\Reflection] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../phpdocumentor/reflection-common/src
+                                                    [1] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../phpdocumentor/reflection-docblock/src
+                                                    [2] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../phpdocumentor/type-resolver/src
+                                                )
+
+                                            [Webmozart\Assert] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../webmozart/assert/src
+                                                )
+
+                                            [Tests\Support] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../../tests/_support
+                                                )
+
+                                            [Symfony\Polyfill\Ctype] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../symfony/polyfill-ctype
+                                                )
+
+                                            [Psr\Log] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../psr/log/Psr/Log
+                                                )
+
+                                            [Prophecy] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../phpspec/prophecy/src/Prophecy
+                                                )
+
+                                            [PhpParser] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../nikic/php-parser/lib/PhpParser
+                                                )
+
+                                            [Laminas\ZendFrameworkBridge] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../laminas/laminas-zendframework-bridge/src
+                                                )
+
+                                            [Laminas\Escaper] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../laminas/laminas-escaper/src
+                                                )
+
+                                            [Kint] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../kint-php/kint/src
+                                                )
+
+                                            [Firebase\JWT] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../firebase/php-jwt/src
+                                                )
+
+                                            [Faker] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../fakerphp/faker/src/Faker
+                                                )
+
+                                            [Doctrine\Instantiator] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../doctrine/instantiator/src/Doctrine/Instantiator
+                                                )
+
+                                            [DeepCopy] => Array
+                                                (
+                                                    [0] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\composer/../myclabs/deep-copy/src/DeepCopy
+                                                )
+
+                                        )
+
+                                    [classmap:protected] => Array
+                                        (
+                                            [Psr\Log\AbstractLogger] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/AbstractLogger.php
+                                            [Psr\Log\InvalidArgumentException] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/InvalidArgumentException.php
+                                            [Psr\Log\LoggerAwareInterface] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/LoggerAwareInterface.php
+                                            [Psr\Log\LoggerAwareTrait] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/LoggerAwareTrait.php
+                                            [Psr\Log\LoggerInterface] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/LoggerInterface.php
+                                            [Psr\Log\LoggerTrait] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/LoggerTrait.php
+                                            [Psr\Log\LogLevel] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/LogLevel.php
+                                            [Psr\Log\NullLogger] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/PSR/Log/NullLogger.php
+                                            [Laminas\Escaper\Escaper] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\ThirdParty/Escaper/Escaper.php
+                                        )
+
+                                )
+
+                        )
+
+                    [logger:protected] => CodeIgniter\Log\Logger Object
+                        (
+                            [logLevels:protected] => Array
+                                (
+                                    [emergency] => 1
+                                    [alert] => 2
+                                    [critical] => 3
+                                    [error] => 4
+                                    [warning] => 5
+                                    [notice] => 6
+                                    [info] => 7
+                                    [debug] => 8
+                                )
+
+                            [loggableLevels:protected] => Array
+                                (
+                                    [0] => emergency
+                                    [1] => alert
+                                    [2] => critical
+                                    [3] => error
+                                    [4] => warning
+                                    [5] => notice
+                                    [6] => info
+                                    [7] => debug
+                                    [8] => 
+                                )
+
+                            [filePermissions:protected] => 420
+                            [dateFormat:protected] => Y-m-d H:i:s
+                            [fileExt:protected] => 
+                            [handlers:protected] => Array
+                                (
+                                    [CodeIgniter\Log\Handlers\FileHandler] => CodeIgniter\Log\Handlers\FileHandler Object
+                                        (
+                                            [path:protected] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\writable\logs/
+                                            [fileExtension:protected] => log
+                                            [filePermissions:protected] => 420
+                                            [handles:protected] => Array
+                                                (
+                                                    [0] => critical
+                                                    [1] => alert
+                                                    [2] => emergency
+                                                    [3] => debug
+                                                    [4] => error
+                                                    [5] => info
+                                                    [6] => notice
+                                                    [7] => warning
+                                                )
+
+                                            [dateFormat:protected] => Y-m-d H:i:s
+                                        )
+
+                                    [CodeIgniter\Log\Handlers\ChromeLoggerHandler] => CodeIgniter\Log\Handlers\ChromeLoggerHandler Object
+                                        (
+                                            [backtraceLevel:protected] => 0
+                                            [json:protected] => Array
+                                                (
+                                                    [version] => 1
+                                                    [columns] => Array
+                                                        (
+                                                            [0] => log
+                                                            [1] => backtrace
+                                                            [2] => type
+                                                        )
+
+                                                    [rows] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => Array
+                                                                        (
+                                                                            [0] => Pozostało czasu tokenowi: 3261
+                                                                        )
+
+                                                                    [1] => G:\Uniwersytet 3-go wieku\mine_www_apps_projects\repeater_backend_of_the_app_codeigniter_4\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php:45
+                                                                    [2] => warn
+                                                                )
+
+                                                        )
+
+                                                    [request_uri] => http://localhost:8080/repeatQueries/getRepeatsNumsForCourses/12
+                                                )
+
+                                            [header:protected] => X-ChromeLogger-Data
+                                            [levels:protected] => Array
+                                                (
+                                                    [emergency] => error
+                                                    [alert] => error
+                                                    [critical] => error
+                                                    [error] => error
+                                                    [warning] => warn
+                                                    [notice] => warn
+                                                    [info] => info
+                                                    [debug] => info
+                                                )
+
+                                            [handles:protected] => Array
+                                                (
+                                                    [0] => critical
+                                                    [1] => alert
+                                                    [2] => emergency
+                                                    [3] => debug
+                                                    [4] => error
+                                                    [5] => info
+                                                    [6] => notice
+                                                    [7] => warning
+                                                )
+
+                                            [dateFormat:protected] => Y-m-d H:i:s
+                                        )
+
+                                )
+
+                            [handlerConfig:protected] => Array
+                                (
+                                    [CodeIgniter\Log\Handlers\FileHandler] => Array
+                                        (
+                                            [handles] => Array
+                                                (
+                                                    [0] => critical
+                                                    [1] => alert
+                                                    [2] => emergency
+                                                    [3] => debug
+                                                    [4] => error
+                                                    [5] => info
+                                                    [6] => notice
+                                                    [7] => warning
+                                                )
+
+                                            [fileExtension] => 
+                                            [filePermissions] => 420
+                                            [path] => 
+                                        )
+
+                                    [CodeIgniter\Log\Handlers\ChromeLoggerHandler] => Array
+                                        (
+                                            [handles] => Array
+                                                (
+                                                    [0] => critical
+                                                    [1] => alert
+                                                    [2] => emergency
+                                                    [3] => debug
+                                                    [4] => error
+                                                    [5] => info
+                                                    [6] => notice
+                                                    [7] => warning
+                                                )
+
+                                        )
+
+                                )
+
+                            [logCache] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [level] => warning
+                                            [msg] => Pozostało czasu tokenowi: 3261
+                                        )
+
+                                )
+
+                            [cacheLogs:protected] => 1
+                        )
+
+                    [debug:protected] => 1
+                    [performanceData:protected] => Array
+                        (
+                        )
+
+                    [config:protected] => Config\View Object
+                        (
+                            [saveData] => 1
+                            [filters] => Array
+                                (
+                                    [abs] => \abs
+                                    [capitalize] => \CodeIgniter\View\Filters::capitalize
+                                    [date] => \CodeIgniter\View\Filters::date
+                                    [date_modify] => \CodeIgniter\View\Filters::date_modify
+                                    [default] => \CodeIgniter\View\Filters::default
+                                    [esc] => \CodeIgniter\View\Filters::esc
+                                    [excerpt] => \CodeIgniter\View\Filters::excerpt
+                                    [highlight] => \CodeIgniter\View\Filters::highlight
+                                    [highlight_code] => \CodeIgniter\View\Filters::highlight_code
+                                    [limit_words] => \CodeIgniter\View\Filters::limit_words
+                                    [limit_chars] => \CodeIgniter\View\Filters::limit_chars
+                                    [local_currency] => \CodeIgniter\View\Filters::local_currency
+                                    [local_number] => \CodeIgniter\View\Filters::local_number
+                                    [lower] => \strtolower
+                                    [nl2br] => \CodeIgniter\View\Filters::nl2br
+                                    [number_format] => \number_format
+                                    [prose] => \CodeIgniter\View\Filters::prose
+                                    [round] => \CodeIgniter\View\Filters::round
+                                    [strip_tags] => \strip_tags
+                                    [title] => \CodeIgniter\View\Filters::title
+                                    [upper] => \strtoupper
+                                )
+
+                            [plugins] => Array
+                                (
+                                    [current_url] => \CodeIgniter\View\Plugins::currentURL
+                                    [previous_url] => \CodeIgniter\View\Plugins::previousURL
+                                    [mailto] => \CodeIgniter\View\Plugins::mailto
+                                    [safe_mailto] => \CodeIgniter\View\Plugins::safeMailto
+                                    [lang] => \CodeIgniter\View\Plugins::lang
+                                    [validation_errors] => \CodeIgniter\View\Plugins::validationErrors
+                                    [route] => \CodeIgniter\View\Plugins::route
+                                    [siteURL] => \CodeIgniter\View\Plugins::siteURL
+                                )
+
+                            [coreFilters:protected] => Array
+                                (
+                                    [abs] => \abs
+                                    [capitalize] => \CodeIgniter\View\Filters::capitalize
+                                    [date] => \CodeIgniter\View\Filters::date
+                                    [date_modify] => \CodeIgniter\View\Filters::date_modify
+                                    [default] => \CodeIgniter\View\Filters::default
+                                    [esc] => \CodeIgniter\View\Filters::esc
+                                    [excerpt] => \CodeIgniter\View\Filters::excerpt
+                                    [highlight] => \CodeIgniter\View\Filters::highlight
+                                    [highlight_code] => \CodeIgniter\View\Filters::highlight_code
+                                    [limit_words] => \CodeIgniter\View\Filters::limit_words
+                                    [limit_chars] => \CodeIgniter\View\Filters::limit_chars
+                                    [local_currency] => \CodeIgniter\View\Filters::local_currency
+                                    [local_number] => \CodeIgniter\View\Filters::local_number
+                                    [lower] => \strtolower
+                                    [nl2br] => \CodeIgniter\View\Filters::nl2br
+                                    [number_format] => \number_format
+                                    [prose] => \CodeIgniter\View\Filters::prose
+                                    [round] => \CodeIgniter\View\Filters::round
+                                    [strip_tags] => \strip_tags
+                                    [title] => \CodeIgniter\View\Filters::title
+                                    [upper] => \strtoupper
+                                )
+
+                            [corePlugins:protected] => Array
+                                (
+                                    [current_url] => \CodeIgniter\View\Plugins::currentURL
+                                    [previous_url] => \CodeIgniter\View\Plugins::previousURL
+                                    [mailto] => \CodeIgniter\View\Plugins::mailto
+                                    [safe_mailto] => \CodeIgniter\View\Plugins::safeMailto
+                                    [lang] => \CodeIgniter\View\Plugins::lang
+                                    [validation_errors] => \CodeIgniter\View\Plugins::validationErrors
+                                    [route] => \CodeIgniter\View\Plugins::route
+                                    [siteURL] => \CodeIgniter\View\Plugins::siteURL
+                                )
+
+                        )
+
+                    [saveData:protected] => 1
+                    [viewsCount:protected] => 0
+                    [layout:protected] => 
+                    [sections:protected] => Array
+                        (
+                        )
+
+                    [currentSection:protected] => 
+                )
+
+        )
+
+    [allowCallbacks:protected] => 1
+    [tempAllowCallbacks:protected] => 1
+    [afterInsert:protected] => Array
+        (
+        )
+
+    [afterUpdate:protected] => Array
+        (
+        )
+
+    [beforeFind:protected] => Array
+        (
+        )
+
+    [afterFind:protected] => Array
+        (
+        )
+
+    [beforeDelete:protected] => Array
+        (
+        )
+
+    [afterDelete:protected] => Array
+        (
+        )
+
+)

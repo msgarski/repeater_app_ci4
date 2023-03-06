@@ -29,6 +29,7 @@ function validateJWTFromRequest(string $encodedToken)
 
     log_message(5,'Pozostało czasu tokenowi: '.$timeLeft);
 
+
     if($userModel->getUserByEmail($decodedToken->email) && ($timeLeft > 0))
     {
         return true;
@@ -60,4 +61,35 @@ function getSignedJWTForUser($email)
     $jwt = JWT::encode($payload, service('getSecretKey') );
     return $jwt;
 }
+
+function getSignedJWTForUserIdNumber($userId)
+{
+    $userModel = service('userModel');
+
+    $user = $userModel->getUserByIdNumber($userId);
+
+    if($user)
+    {
+        $issuedAtTime = time();
+
+        $tokenLifeTime = getenv('JWT_TIME_TO_LIVE');
+        
+        $tokenExpiration = $issuedAtTime + $tokenLifeTime;
+        $payload = [
+            'email' => $user->email,
+            'iat' => $issuedAtTime,
+            'exp' => $tokenExpiration,
+        ];
+
+        $jwt = JWT::encode($payload, service('getSecretKey') );
+        return $jwt;
+    }
+    else
+    { 
+        throw new Exception('Missing or invalid user Id number');
+    }
+}
+
+
+
 ?>

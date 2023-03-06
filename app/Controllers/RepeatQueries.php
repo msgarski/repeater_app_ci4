@@ -43,6 +43,7 @@ class RepeatQueries extends BaseController
     }
     public function getRepeatsNumsForCourses($user_id)
     {
+
         $db = \Config\Database::connect();
         
         
@@ -50,15 +51,18 @@ class RepeatQueries extends BaseController
         {
             $model = new QueriesRepeatModel($db);
 
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($user_id);
+
             $resultData = $model->getRepeatsNumsForCourses($user_id);
-            $token = 111;
 
             $result = [
-                'dbData' => $resultData,
-                'token' => $token,
+                'payload' => $resultData,
+                'newToken' => $jwt,
             ];
             
             return $this->respond($result, 200);   
+            // return $this->response->setJSON($result);
                 
         } 
         else 

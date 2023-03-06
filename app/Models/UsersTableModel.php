@@ -11,6 +11,7 @@ class UsersTableModel extends \CodeIgniter\Model
     protected $primaryKey = 'user_id';
 
     protected $allowedFields = ['name',
+                                'user_id',
                                 'email',
                                 'password',
                                 'activation_hash',
@@ -141,9 +142,18 @@ class UsersTableModel extends \CodeIgniter\Model
     }
 
     public function getUserByEmail($email)
-    {
+    {        
         $user = $this->where('email', $email)
+                        ->first();   
+        return $user;
+    }
+
+    public function getUserByIdNumber($userId)
+    {
+        $user = $this->where('user_id', $userId)
                         ->first();
+        // error_log(print_r($user, true), 3, 'my.log');
+
         return $user;
     }
 }
