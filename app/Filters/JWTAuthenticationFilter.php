@@ -31,7 +31,9 @@ class JWTAuthenticationFilter implements FilterInterface
             if(validateJWTFromRequest($encodedToken)){
                 return $request;
             }else{
-                // failure and... what?
+                $response = service('response');
+                $response->setStatusCode(403);
+                return $response; 
             }
         } catch (Exception $e) {
             return Services::response()
