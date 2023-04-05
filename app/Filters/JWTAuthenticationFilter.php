@@ -42,7 +42,7 @@ class JWTAuthenticationFilter implements FilterInterface
                         'error' => $e->getMessage()
                     ]
                 )
-                ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
+                ->setStatusCode(ResponseInterface::HTTP_FORBIDDEN);
         }
     }
 

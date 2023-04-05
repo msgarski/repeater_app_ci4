@@ -49,10 +49,18 @@ class CourseQueries extends BaseController
         $db = \Config\Database::connect();
 
         $model = new QueriesCardsModel($db);
+
+        helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($user_id);
         
         if ($db && $user_id) 
         {
-            $result = $model->getFullInfoOfUserCourses($user_id);
+            $resultData = $model->getFullInfoOfUserCourses($user_id);
+
+            $result = [
+                'payload' => $resultData,
+                'newToken' => $jwt,
+            ];
             
             return $this->respond($result, 200);            
         } 
