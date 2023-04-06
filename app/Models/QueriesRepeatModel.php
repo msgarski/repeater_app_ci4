@@ -57,7 +57,7 @@ class QueriesRepeatModel
     public function getFullInfoOfUserCourses($user_id)
     {
         $query = $this->db->query("
-        select c.user_id, c.course_id, count(l.lesson_id) as lesson_amount, 
+        select c.user_id, c.course_id, c.name, c.description, count(l.lesson_id) as lesson_amount, 
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = l.lesson_id) as card_amount,
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = l.lesson_id AND card.awkward = 1) as awkward_amount,
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = l.lesson_id AND card.learned_at IS NULL) as for_learning,

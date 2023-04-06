@@ -50,7 +50,7 @@ class QueriesCardsModel
     public function getFullInfoOfUserCourses($user_id)
     {
         $query = $this->db->query("
-        SELECT course.user_id, course.course_id, (SELECT COUNT(*) FROM lesson WHERE lesson.course_id = course.course_id) as lesson_amount, count(card.card_id) as card_amount,
+        SELECT course.user_id, course.course_id, course.name, course.description, (SELECT COUNT(*) FROM lesson WHERE lesson.course_id = course.course_id) as lesson_amount, count(card.card_id) as card_amount,
         COUNT(card.card_id) - (SUM(CASE WHEN card.learned_at IS NOT NULL THEN 1 ELSE 0 END)) AS for_learning,
         SUM(CASE WHEN card.awkward = 1 THEN 1 ELSE 0 END) AS awkward_amount,
         SUM(CASE WHEN card.next_repeat < NOW() THEN 1 ELSE 0 END) AS for_repeating
