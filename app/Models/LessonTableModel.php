@@ -28,6 +28,7 @@ class LessonTableModel extends \CodeIgniter\Model
     public function getAllLessonsByUserId($userId)
     {
         //! funkcja na razie nieczynna
+        
         // return $this->where('user_id', $userId)
         //                 ->findAll();
     }

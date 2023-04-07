@@ -24,16 +24,23 @@ class CourseQueries extends BaseController
 
     protected $model;
 
-
-    public function getFullInfoOfUserLessons($user_id){
+//todo proba odebrania dwóch parametrów z frontu...
+    public function getInfoOfCourseLessons($course_id){
         $db = \Config\Database::connect();
 
         $model = new QueriesCardsModel($db);
-        // var_dump('w pytaniu o lessons');
-        // exit;
-        if ($db && $user_id) 
+
+        // helper('jwt_helper');
+        //     $jwt = getSignedJWTForUserIdNumber($user_id);
+
+        if ($db && $course_id) 
         {
-            $result = $model->getFullInfoOfUserLessons($user_id);
+            $resultData = $model->getFullInfoOfCourseLessons($course_id);
+
+            $result = [
+                'payload' => $resultData,
+                'newToken' => 'empty',
+            ];
             
             return $this->respond($result, 200);            
         } 
@@ -44,6 +51,39 @@ class CourseQueries extends BaseController
             return $this->respond('pobranie danych nieudane!!!', 401);
         }
     }
+
+
+
+    public function getFullInfoOfUserLessons($user_id){
+        $db = \Config\Database::connect();
+
+        $model = new QueriesCardsModel($db);
+
+        // var_dump('w pytaniu o lessons');
+        // exit;
+
+        helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($user_id);
+
+        if ($db && $user_id) 
+        {
+            $resultData = $model->getFullInfoOfUserLessons($user_id);
+
+            $result = [
+                'payload' => $resultData,
+                'newToken' => $jwt,
+            ];
+            
+            return $this->respond($result, 200);            
+        } 
+        else 
+        {
+            // var_dump('nieudane zapisanie', $data['user_id']);
+            // exit;
+            return $this->respond('pobranie danych nieudane!!!', 401);
+        }
+    }
+
     public function getFullInfoOfUserCourses($user_id = null)
     {
         $db = \Config\Database::connect();

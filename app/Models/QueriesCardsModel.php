@@ -32,7 +32,7 @@ class QueriesCardsModel
     public function getFullInfoOfUserLessons($user_id)
     {
         $query = $this->db->query("
-        SELECT lesson.lesson_id, 
+        SELECT lesson.lesson_id, lesson.course_id, lesson.name, lesson.description,
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id) as card_amount,
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.learned_at IS NULL) as for_learning,
             (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.next_repeat < NOW()) as for_repeating
@@ -47,6 +47,27 @@ class QueriesCardsModel
 
         return $query->getResult();
     }
+
+public function getFullInfoOfCourseLessons($course_id)
+    {
+        $query = $this->db->query("
+        SELECT lesson.lesson_id, lesson.course_id, lesson.name, lesson.description,
+            (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id) as card_amount,
+            (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.learned_at IS NULL) as for_learning,
+            (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.next_repeat < NOW()) as for_repeating
+        FROM lesson
+            LEFT JOIN course
+                ON lesson.course_id = course.course_id
+            LEFT JOIN user
+                ON user.user_id = course.user_id
+        WHERE lesson.course_id = " .$this->db->escape($course_id)."
+        GROUP BY lesson.lesson_id;
+        ");
+
+        return $query->getResult();
+    }
+
+
     public function getFullInfoOfUserCourses($user_id)
     {
         $query = $this->db->query("
@@ -78,7 +99,6 @@ class QueriesCardsModel
         
         return $score->getResult();
     }
-
 
     public function pytania()
     {
@@ -131,6 +151,19 @@ class QueriesCardsModel
                         // ON user.user_id = course.user_id
                         // WHERE user.user_id = 2
                         // GROUP BY lesson.lesson_id
+
+    // dobre, ale rozszerzyłem zasięg informacji:
+        //         SELECT lesson.lesson_id, 
+        //     (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id) as card_amount,
+        //     (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.learned_at IS NULL) as for_learning,
+        //     (SELECT COUNT(*) FROM card WHERE card.lesson_id = lesson.lesson_id AND card.next_repeat < NOW()) as for_repeating
+        // FROM lesson
+        //     LEFT JOIN course
+        //         ON lesson.course_id = course.course_id
+        //     LEFT JOIN user
+        //         ON user.user_id = course.user_id
+        // WHERE user.user_id = " .$this->db->escape($user_id)."
+        // GROUP BY lesson.lesson_id;
 
 
 

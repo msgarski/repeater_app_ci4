@@ -52,6 +52,7 @@ class Course extends ResourceController
         */
         // var_dump('w kontrolerze lekcjow');
         // exit;
+        
         $lessonModel = service('lessonModel');
 
         $data = $lessonModel->getAllLessonsByCourseId($courseId);
