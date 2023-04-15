@@ -42,7 +42,7 @@ class Lesson extends ResourceController
 
         // var_dump('w kontrolerze ', $lesson);
         // exit;
-
+        
         if ($this->lessonModel->insert($lesson)) 
         {          
             return $this->respond('udalo sie', 200);
