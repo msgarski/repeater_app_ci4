@@ -15,8 +15,6 @@ class Signup extends ResourceController
 
     public function create()
     {
-        // var_dump('w tworzeniu usera');
-        // exit;
         /*
         *   Method is ready for succesfully creating new user
         *
@@ -57,11 +55,8 @@ class Signup extends ResourceController
             return $this->respond("ERRORRRRRRR tworzenia usera", 400);
         }
     }
-
     public function activate($token)
     {       
-        // var_dump('moje dane', $token);
-        // exit;
         $model = service('userModel');
 
         $result = $model->activateByToken($token);
@@ -76,14 +71,8 @@ class Signup extends ResourceController
         }
         
     }
-
-
-
-
     public function sendActivationEmail($user)
     {
-        // var_dump('moje dane', );
-        // exit;
         $email = service('email');
 
 		$email->setTo($user->email);

@@ -39,9 +39,6 @@ class Lesson extends ResourceController
             'description'   =>  $http->description,
             'course_id' =>  $http->courseId,
         ];
-
-        // var_dump('w kontrolerze ', $lesson);
-        // exit;
         
         if ($this->lessonModel->insert($lesson)) 
         {          

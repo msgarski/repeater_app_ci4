@@ -16,18 +16,24 @@ class Login extends ResourceController
 {
     // ! delete log_message() before production !!!!
     // ChromePhp::log('Hello console!');
+
     // error_log(print_r($_SERVER['DOCUMENT_ROOT'], true), 3, 'my.log');
+    // error_log( print_r( $http, true ), 3, 'my.log' );
+
+    // log_message(8,'Some 8variable did not contain a value.');
+    // log_message(5,'Some 4ariable did not contain a value: ');
+    // log_message(5,'Pozostało czasu tokenowi: '.$timeLeft);
+
+
     use ResponseTrait;
 
     public function entering()
     {
 
-// log_message(8,'Some 8variable did not contain a value.');
 
         $http = $this->request->getJSON();
 
         $email = $http->email;
-// log_message(5,'Some 4ariable did not contain a value: ');
 
         $password = $http->password;
         

@@ -25,29 +25,31 @@ class CourseQueries extends BaseController
     protected $model;
 
 //todo proba odebrania dwóch parametrów z frontu...
-    public function getInfoOfCourseLessons($course_id){
+    public function getInfoOfCourseLessons($user_id = 0, $course_id = 0){
         $db = \Config\Database::connect();
 
         $model = new QueriesCardsModel($db);
 
         // helper('jwt_helper');
         //     $jwt = getSignedJWTForUserIdNumber($user_id);
+        // log_message(5,'Odebrany course_id i user_id : '.$course_id.$user_id);
 
-        if ($db && $course_id) 
+        if ($db && $course_id && $user_id) 
         {
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($user_id);
+
             $resultData = $model->getFullInfoOfCourseLessons($course_id);
 
             $result = [
                 'payload' => $resultData,
-                'newToken' => 'empty',
+                'newToken' => $jwt,
             ];
             
             return $this->respond($result, 200);            
         } 
         else 
         {
-            // var_dump('nieudane zapisanie', $data['user_id']);
-            // exit;
             return $this->respond('pobranie danych nieudane!!!', 401);
         }
     }
