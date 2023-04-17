@@ -30,8 +30,7 @@ class CourseQueries extends BaseController
 
         $model = new QueriesCardsModel($db);
 
-        // helper('jwt_helper');
-        //     $jwt = getSignedJWTForUserIdNumber($user_id);
+        
         // log_message(5,'Odebrany course_id i user_id : '.$course_id.$user_id);
 
         if ($db && $course_id && $user_id) 

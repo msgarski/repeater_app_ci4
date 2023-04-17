@@ -81,10 +81,11 @@ class Cards extends BaseController
         
         if ($this->model->insert($card)) 
         {
-        
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->user_id);
             //$data['recent'] = $this->model->amountOfCards();
             
-            return $this->respond('słowo zapisane', 200);            
+            return $this->respond($jwt, 200);            
         } 
         else 
         {
