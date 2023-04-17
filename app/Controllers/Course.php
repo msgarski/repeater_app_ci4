@@ -35,8 +35,10 @@ class Course extends ResourceController
         ];
        // 'genre_id'  =>  $http->genre_id,
         if ($this->courseModel->insert($course)) 
-        {         
-            return $this->respond('kurs zapisany', 200);
+        {  
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->user_id);       
+            return $this->respond($jwt, 200);
         } 
         else 
         {

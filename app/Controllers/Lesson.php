@@ -42,7 +42,9 @@ class Lesson extends ResourceController
         
         if ($this->lessonModel->insert($lesson)) 
         {          
-            return $this->respond('udalo sie', 200);
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->user_id);
+            return $this->respond($jwt, 200);
         } 
         else 
         {
