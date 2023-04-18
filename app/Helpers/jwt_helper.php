@@ -27,7 +27,7 @@ function validateJWTFromRequest(string $encodedToken)
 
     $timeLeft = $decodedToken->exp - time();
 
-    log_message(5,'Pozostało czasu tokenowi: '.$timeLeft);
+    // log_message(5,'Pozostało czasu tokenowi: '.$timeLeft);
 
 
     if($userModel->getUserByEmail($decodedToken->email) && ($timeLeft > 0))

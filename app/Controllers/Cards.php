@@ -66,7 +66,6 @@ class Cards extends BaseController
         *   this method gets new card data from form and
         *   save them as new record in cardTable
         */
-        
         $http = $this->request->getJSON();
         
         $card = [
@@ -99,17 +98,19 @@ class Cards extends BaseController
         *   and save them in cardTable
         */
 
-        $mass = new MassCardInput;                              // create instance of massCardsInput class
+
+        // log_message(5,'jestem w create many cards: ');
+
+        $mass = new MassCardInput;   
 
         $http = $this->request->getJSON();
        
         // może array()?
-        $lesson_id = $http->lessId;
+        $lesson_id = $http->lesson_id;
 
         $priority = $http->priority;
-        // var_dump('na serwerze', $http->priority);
-        // exit;
-        $cardsAsString = $http->cardsInput; // pobranie zawartości pola textarea formularza
+       
+        $cardsAsString = $http->cardsInput;
         
         $score = $mass->cardsInputFormatting($cardsAsString);
 
@@ -117,7 +118,9 @@ class Cards extends BaseController
 
         if($result)
         {
-            return $this->respond('zapis wielu słów udany', 200);
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->user_id);
+            return $this->respond($jwt, 200);
         }
         else
         {
@@ -127,8 +130,6 @@ class Cards extends BaseController
     public function fillLessonTable($lesson_id)
     {
         $result = $this->model->getCardsforLesson($lesson_id);
-        // var_dump($result);
-        // exit;
 
         if($result)
         {
