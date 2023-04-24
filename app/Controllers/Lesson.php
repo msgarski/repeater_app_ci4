@@ -24,7 +24,6 @@ class Lesson extends ResourceController
         $this->lessonModel = service('lessonModel');
     }
 
-
     public function create()
     {
         /*
@@ -50,6 +49,36 @@ class Lesson extends ResourceController
         {
             return $this->respond('error jakiś', 401);
         }
+    }
+
+    public function updatingLessonInfo()
+    {
+        /*
+        *   methods for updating lesson info, inside specific course
+        *
+        */
+
+        $http = $this->request->getJSON();
+        $lesson_id = $http->lessonId;
+
+        $lesson = [
+            'name'  =>  $http->name,
+            'description'   =>  $http->description,
+            'lesson_id' =>  $http->lessonId,
+        ];
+
+        if ($this->lessonModel->updateLessonByLessonId($lesson_id, $http)) 
+        {          
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->userId);
+
+            return $this->respond($jwt, 200);
+        } 
+        else 
+        {
+            return $this->respond('error jakiś', 401);
+        }
+
     }
 
 

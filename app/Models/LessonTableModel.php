@@ -32,18 +32,27 @@ class LessonTableModel extends \CodeIgniter\Model
         // return $this->where('user_id', $userId)
         //                 ->findAll();
     }
-
     public function getAllLessonsByCourseId($courseId)
     {
         return $this->where('course_id', $courseId)
                     ->findAll();
     }
-
     public function getLessonByLessonId($lessonId)
     {
         return $this->where('lesson_id', $lessonId)
                     ->first();
     }
-
+    public function updateLessonByLessonId($lesson_id, $http)
+    {
+        $data = [
+            'name'              =>  $http->name,
+            'description'       =>  $http->description  
+        ];
+        
+        $this->where('lesson_id', $lesson_id)
+                ->set($data)
+                ->update();
+        return true;
+    }
     
 }

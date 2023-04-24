@@ -159,9 +159,6 @@ class Cards extends BaseController
     }
     public function updateCard($card_id)
     {
-        // var_dump('karta do updatu', $card_id);
-        // exit; 
-
         $http = $this->request->getJSON();
 
         $data = [
@@ -173,9 +170,16 @@ class Cards extends BaseController
             'image'             =>  $http->image
         ];
 
-        $this->model->updateCard($card_id, $http);
+        if($this->model->updateCard($card_id, $http))
+        {
+            return $this->respond('udało się updatować kartę ', 200);
+        }
+        else
+        {
+            return $this->respond('error jakiś', 401);
+        }
+        
 
-        return $this->respond('udało się updatować kartę ', 200);
 
     }
 }
