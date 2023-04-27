@@ -45,7 +45,35 @@ class Course extends ResourceController
             return $this->respond('błąd danych', 401);
         }
     }
+    public function updatingCourseInfo()
+    {
+        /*
+        *   methods for updating course info
+        *
+        */
 
+        $http = $this->request->getJSON();
+        $course_id = $http->courseId;
+
+        $lesson = [
+            'name'  =>  $http->name,
+            'description'   =>  $http->description,
+            'course_id' =>  $http->courseId,
+        ];
+
+        if ($this->courseModel->updateCourseByCourseId($course_id, $http)) 
+        {          
+            helper('jwt_helper');
+            $jwt = getSignedJWTForUserIdNumber($http->userId);
+
+            return $this->respond($jwt, 200);
+        } 
+        else 
+        {
+            return $this->respond('error jakiś', 401);
+        }
+
+    }
     public function getInsideCourse($courseId)
     {
         /*
@@ -59,7 +87,6 @@ class Course extends ResourceController
 
         return $this->respond($data);
     }
-
     public function getAllCoursesForUser($user_id = null)
     {
         /*

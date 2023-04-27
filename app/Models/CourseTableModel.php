@@ -28,12 +28,24 @@ class CourseTableModel extends \CodeIgniter\Model
     protected $validationMessages = [
     ];
 
+public function updateCourseByCourseId($course_id, $http)
+    {
+        $data = [
+            'name'              =>  $http->name,
+            'description'       =>  $http->description  
+        ];
+        
+        $this->where('course_id', $course_id)
+                ->set($data)
+                ->update();
+        return true;
+    }
+
     public function getAllCoursesByUserId($userId)
     {
         return $this->where('user_id', $userId)
                         ->findAll();
     }
-
     public function getCourseByCourseId($courseId)
     {
         return $this->where('course_id', $courseId)
