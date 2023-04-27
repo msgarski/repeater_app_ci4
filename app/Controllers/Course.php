@@ -26,6 +26,7 @@ class Course extends ResourceController
 
     public function createCourse()
     {
+
         $http = $this->request->getJSON();
 
         $course = [
@@ -33,7 +34,8 @@ class Course extends ResourceController
             'name'      =>  $http->name,
             'description'   =>  $http->description
         ];
-       // 'genre_id'  =>  $http->genre_id,
+                    // log_message(5,'id kursu: '.$course);
+
         if ($this->courseModel->insert($course)) 
         {  
             helper('jwt_helper');
@@ -65,7 +67,6 @@ class Course extends ResourceController
         {          
             helper('jwt_helper');
             $jwt = getSignedJWTForUserIdNumber($http->userId);
-
             return $this->respond($jwt, 200);
         } 
         else 
@@ -73,6 +74,21 @@ class Course extends ResourceController
             return $this->respond('error jakiś', 401);
         }
 
+    }
+    public function deleteCourseByCourseId($course_id)
+    {
+    log_message(5,'id kursu: '.$course_id);
+
+        if ($this->courseModel->deleteCourse($course_id)) 
+        {          
+            // helper('jwt_helper');
+            // $jwt = getSignedJWTForUserIdNumber($http->userId);
+            return $this->respond('ok', 200);
+        } 
+        else 
+        {
+            return $this->respond('error jakiś', 401);
+        }
     }
     public function getInsideCourse($courseId)
     {

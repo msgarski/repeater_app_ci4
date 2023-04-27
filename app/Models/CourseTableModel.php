@@ -27,7 +27,12 @@ class CourseTableModel extends \CodeIgniter\Model
 
     protected $validationMessages = [
     ];
-
+public function deleteCourse($course_id)
+{
+    $this->where('course_id', $course_id)
+                ->delete();
+        return true;
+}
 public function updateCourseByCourseId($course_id, $http)
     {
         $data = [
@@ -40,13 +45,12 @@ public function updateCourseByCourseId($course_id, $http)
                 ->update();
         return true;
     }
-
-    public function getAllCoursesByUserId($userId)
+public function getAllCoursesByUserId($userId)
     {
         return $this->where('user_id', $userId)
                         ->findAll();
     }
-    public function getCourseByCourseId($courseId)
+public function getCourseByCourseId($courseId)
     {
         return $this->where('course_id', $courseId)
                     ->first();
